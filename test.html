@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<title>Websanova Scratch Pad</title>
+
+	<!-- jQuery -->
+	<script type="text/javascript" src="./inc/jquery.1.8.2.min.js"></script>
+
+	<!-- wScratchPad -->
+	<script type="text/javascript" src="./wScratchPad1.js"></script>
+</head>
+<body>
+
+<!--<div id="wScratchPad" style="display:inline-block; position:relative; border:solid black 1px;"></div>
+
+<div>
+    <a id="reset" href="javascript:reset_to_defaults();">reset to defaults</a> |
+    <a id="reset" href="javascript:reset();">reset</a> |
+    <a href="javascript:clear();">clear</a> |
+    <a id="reset" href="javascript:reset_with_new_color();">reset with new color</a> |
+    <a href="javascript:get_color();">get color</a> |
+    <a href="javascript:set_image_bg();">set image background</a> |
+    <a href="javascript:set_image_overlay();">set overlay image</a> |
+    <a href="javascript:set_to_winner();">set to winner</a> |
+    <a href="javascript:change_size();">change size</a> |
+    <a href="javascript:enabled(false);">disable</a> |
+    <a href="javascript:enabled(true);">enable</a> |
+</div> -->
+
+
+	<script type="text/javascript">
+		var sp = $("#wScratchPad").wScratchPad({
+			scratchDown: function(e, percent){$("#percent_scratched").html(percent)},
+			scratchMove: function(e, percent){$("#percent_scratched").html(percent)},
+			scratchUp: function(e, percent){$("#percent_scratched").html(percent)}
+		});
+
+		function set_to_winner()
+		{
+			sp.wScratchPad('width', '200');
+			sp.wScratchPad('image', './images/winner.png');
+			sp.wScratchPad('image2', './images/scratch-to-win.png');
+			sp.wScratchPad('cursor', './cursors/coin.png');
+			sp.wScratchPad('reset');
+		}
+
+		function change_size()
+		{
+			sp.wScratchPad('size', '5');
+		}
+
+		function reset_to_defaults()
+		{
+			sp.wScratchPad('image', './images/slide1.jpg');
+			sp.wScratchPad('image2', null);
+			sp.wScratchPad('color', '#336699');
+			sp.wScratchPad('overlay', 'none');
+			sp.wScratchPad('size', '10');
+			sp.wScratchPad('reset');
+		}
+
+		function reset()
+		{
+			sp.wScratchPad('reset');
+		}
+
+		function clear()
+		{
+			sp.wScratchPad('clear');
+		}
+
+		function reset_with_new_color()
+		{
+			sp.wScratchPad('color', '#FF0000');
+			sp.wScratchPad('image2', null);
+			sp.wScratchPad('reset');
+		}
+		
+		function get_color()
+		{
+			alert(sp.wScratchPad('color'));
+		}
+
+		function set_image_bg()
+		{
+			sp.wScratchPad('image', './images/slide2.jpg');
+			sp.wScratchPad('reset');
+		}
+
+		function set_image_overlay()
+		{
+			sp.wScratchPad('image2', './images/slide3.jpg');
+			sp.wScratchPad('reset');
+		}
+
+		function enabled(toggle)
+		{
+			sp.wScratchPad('enabled', toggle);
+		}
+	</script>
+
+	<!-- clear after 70% -->
+
+	<div id='guaguale' style="width:300px;height:50px;margin:0 auto;">
+
+	</div>
+
+	<!-- <div id="wScratchPad" style="-webkit-box-sizing: border-box;padding:0 100px;line-height: 2em; display:-webkit-box;-webkit-box-align: center;-webkit-box-pack: center; position:relative; border:solid black 1px;width:500px;height:300px;padding-left:200px;font-size:18px;color:red;line-height:1.5em;background-color:green;font:20px yellow">
+
+		一等奖 恭喜你得到一等奖 奖品是台湾七日游 领奖时间 五分钟之内， 过期不候
+		<canvas id="liwan" height="300px" width="500px" style="position:absolute;top:0;left:0;"></canvas>
+	</div> -->
+
+	<script type="text/javascript">
+
+		$("#guaguale").wScratchPad({
+			width : 300,												//	刮刮乐区域宽度
+			height : 46,												//	刮刮乐区域高度
+			image: null,												//	刮刮乐背景图片
+			backColor: '#fddc00',										//	刮刮乐背景颜色
+			color : "#909090",											//	刮刮乐涂层颜色
+			fontColor: '#ff1500',										//	刮刮乐背景字体颜色
+			fontSize : '16px',											//	刮刮乐背景字体大小
+			size : 20,													//	刮刮乐刮笔头大小
+			radius : "10px", 											//	刮刮乐区域圆角
+			message : "一等奖",											//	中奖信息
+			scratchMove: function(e, percent)							//	刮开percent区域时全部显示
+			{
+				if(percent > 70)
+				this.clear();
+			}
+		});
+
+	</script>
+</body>
+</html>
